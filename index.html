@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Chronic Kidney Disease Model</title>
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: "Poppins", sans-serif;
+		}
+		body {
+			font-size: 25px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			background-image: url("https://img.freepik.com/free-vector/clean-medical-background_53876-97927.jpg?w=1060&t=st=1699597868~exp=1699598468~hmac=fd8ed1db6ed22047c3c0f42c317560ff36e0a750f8f881b1a2baaf5b393a8f94");
+		}
+		.ml-container {
+			width: 1080px;
+			height: 620px;
+			border-radius: 10px;
+			color: #fff;
+			box-shadow: 1px 1px 10px 0px rgba(0.5, 0.5, 0.5, 0.5);
+		}
+		.ml-container h1 {
+			font-size: 40px;
+			text-align: center;
+			margin-bottom: 35px;
+			margin-top: 15px;
+		}
+		#first {
+			border-radius: 14px;
+			height: 30px;
+			width: 300px;
+			font-size: 20px;
+			text-align: center;
+		}
+		.ml-container .input-field {
+			margin-bottom: 3px;
+			margin-top: 3px;
+		}
+		#sub {
+			width: 120px;
+			height: 43px;
+			text-align: center;
+			border-radius: 14px;
+			font-size: 22px;
+			position: absolute;
+			left: 980px;
+			top: 730px;
+		}
+		.popup{
+			width: 400px;
+			background: #fff;
+			border-radius: 6px;
+			position: absolute;
+			top:50%;
+			bottom:60%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+			padding: 0 30px 30 px;
+			color: #333;
+			box-shadow: 1px 1px 10px 0px rgba(0.5, 0.5, 0.5, 0.5);
+		}
+		
+</style>
+</head>
+
+<body>
+	<div style="color:black;" class="ml-container">
+		<form action="{{ url_for('predict') }}" method="POST">
+			<h1> Chronic Kidney Disease Prediction</h1>
+			<div class="container">
+				<div class="row">
+				  <div class="col">
+					<div class="input-box">
+						<div class="input-field">
+							<h3>Blood Pressure</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="bp" placeholder="in mmHg" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Specific Gravity</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="sg" placeholder="Ex: (1.005,1.010,1.015,1.020,1.025)" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Albumin</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="al" placeholder="(0,1,2,3,4,5)" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Suger</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="su" placeholder="(0,1,2,3,4,5)" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Blood Glucose Random</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="bgr" placeholder="in mgs/dl" required="required">
+							<br>
+						</div>
+					</div>
+				  </div>
+				  <div class="col">
+					<div class="input-box">
+						<div class="input-field">
+							<h3>Blood Urea</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="bu" placeholder="in mgs/dl" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Serum Creatinine</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="sc" placeholder="in mgs/dl" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Sodium</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="sod" placeholder="in mEq/L" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Potassium</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="pot" placeholder="in mEq/L" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Hemoglobin</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="hemo" placeholder="in gms" required="required">
+							<br>
+						</div>
+					</div>
+				  </div>
+				  <div class="col">
+					<div class="input-box">
+						<div class="input-field">
+							<h3>Red Blood Cells Count</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="rc" placeholder="in (millions/cumm)" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Hypertension</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="htn" placeholder="yes or no" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Diabetes Mellitus</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="dm" placeholder="yes or no" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Appetite</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="appet" placeholder="good or poor" required="required">
+							<br>
+						</div>
+						<div class="input-field">
+							<h3>Pedal Edema</h3>
+							<i class='bx bxs-edit'></i>
+							<input id="first" name="pe" placeholder="yes or no" required="required">
+							<br>
+						</div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			<br>
+			<br>
+			<button id="sub" type="submit ">Submit</button>
+			<br>
+			<br>
+			<br>
+		</div>
+		</form>
+	</div>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
